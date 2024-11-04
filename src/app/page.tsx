@@ -1,101 +1,191 @@
+import Link from "next/link";
 import Image from "next/image";
+
+import HeroSection from "@/components/HeroSection/HeroSection";
+import WatchCard from "@/components/WatchCard/WatchCard";
+import WatchCategoryCard from "@/components/WatchCategoryCard/WatchCategoryCard";
+import NewsLetter from "@/components/NewsLetter/NewsLetter";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <>
+      <HeroSection showLink />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      <section className={sectionClassNames.section}>
+        <div className={sectionClassNames.trending}>
+          <h2 className={sectionClassNames.trendingTitle}>
+            Currently Trending Watches
+          </h2>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+
+        <div className="grid lg:grid-cols-4 grid-cols-2 gap-5">
+          {watches.map((watch) => (
+            <WatchCard
+              key={watch.id}
+              watchName={watch.name}
+              imageUrl={watch.image}
+              slug={watch.slug}
+              price={watch.price}
+            />
+          ))}
+        </div>
+      </section>
+
+      <h3 className="font-semibold text-2xl max-w-3xl text-center mx-auto text-primary-dark pt-12 sm:pt-28 pb-8 sm:pb-16 leading-[125%] sm:leading-[187%]">
+        Featured Watch
+      </h3>
+
+      <section className={sectionClassNames.featured}>
+        <div className={sectionClassNames.featuredContent}>
+          <h2 className={featuredClassNames.gameName}>{featuredGame.name}</h2>
+          <p className={featuredClassNames.gameDetails}>
+            {featuredGame.description}
+          </p>
+
+          <Link href={`/watch/${featuredGame.slug}`}>
+            <Image
+              src={featuredGame.image}
+              alt={featuredGame.name}
+              width={500}
+              height={500}
+              className={featuredClassNames.gameImage}
+            />
+          </Link>
+        </div>
+      </section>
+
+      <section
+        style={{
+          backgroundImage:
+            "url('https://images.unsplash.com/photo-1519153017650-55aad829d4e6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        }}
+        className={styles.categorySection}
+      >
+        <div className={styles.categoryContent}>
+          <h2 className={styles.categoryHeading}>Categories</h2>
+          <p className={styles.categorySubHeading}>
+            Discover a collection of timepieces that combine classic design and
+            modern functionality. Explore an array of watches, from elegant
+            chronographs to minimalist styles, crafted for durability and
+            precision. Make a statement with versatile designs, perfect for
+            daily wear or special occasions, and experience the art of
+            watchmaking that will keep you stylish and punctual.
+          </p>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
+            {watches.map((watch) => (
+              <WatchCategoryCard
+                key={watch.id}
+                categoryImage={watch.image}
+                categoryName={watch.name}
+                slug={watch.slug}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="recent-watches" className={recentGamesClasses.section}>
+        <h2 className={recentGamesClasses.heading}>Our Recent Watch</h2>
+        <p className={recentGamesClasses.subHeading}>
+          Stay Ahead of the Gaming Curve with Our Latest Games.
+        </p>
+
+        <div className="flex rounded gap-8 flex-wrap py-10">
+          {watches.map((watch) => (
+            <WatchCard
+              key={watch.id}
+              watchName={watch.name}
+              imageUrl={watch.image}
+              price={watch.price}
+              slug={watch.slug}
+            />
+          ))}
+        </div>
+
+        <Link href="watches" className={sectionClassNames.latestButton}>
+          See All
+        </Link>
+      </section>
+
+      <NewsLetter />
+    </>
   );
 }
+
+const sectionClassNames = {
+  section: "px-6 sm:px-12 md:px-20 lg:px-36 mx-auto py-5 text-black",
+  trending: "flex flex-col sm:flex-row items-center justify-between mb-8",
+  trendingTitle: "font-bold text-3xl sm:mr-4",
+  trendingButton:
+    "mt-4 sm:mt-0 px-6 py-2 rounded-md bg-primary hover:bg-primary-dark",
+  latestButton:
+    "mt-4 sm:mt-0 px-6 py-2 rounded-md bg-black border-2 border-primary-dark text-white ",
+  featured: "pb-24 px-6 sm:px-12 md:px-20 lg:px-36 text-white",
+  featuredContent: "mx-auto max-w-screen-xl",
+};
+
+const watches = [
+  {
+    id: 1,
+    price: 12,
+    name: "Watch1",
+    slug: "watch1",
+    image:
+      "https://images.unsplash.com/photo-1444881421460-d838c3b98f95?q=80&w=1920&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    id: 2,
+    price: 14,
+    name: "Watch2",
+    slug: "watch2",
+    image:
+      "https://images.unsplash.com/photo-1488132828189-4e416661b680?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    id: 3,
+    price: 42,
+    name: "Watch3 ",
+    slug: "watch3",
+    image:
+      "https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGxheSUyMHN0YXRpb24lMjBmaWZhfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60",
+  },
+  {
+    id: 4,
+    price: 27,
+    name: "Watch4",
+    slug: "watch4",
+    image:
+      "https://images.unsplash.com/photo-1524592094714-0f0654e20314?q=80&w=1999&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+];
+
+const featuredGame = {
+  name: "Richard Mille",
+  description:
+    "Immerse yourself in timeless elegance with the 'Eternal Domination' timepiece. This watch, crafted for those who lead with confidence, features a striking design that commands attention. With precision engineering and refined detailing, it represents the perfect blend of strength and sophistication. Each element, from the durable case to the intricately designed dial, speaks of authority and grandeur. Whether navigating high-stakes decisions or simply marking moments, this watch ensures you always have a sense of control. Will you rise to greatness with the timepiece that defines ambition? Claim your destiny and make every second count with 'Eternal Domination.'",
+  slug: "eternal-domination",
+  image: "/images/trending.jpg",
+};
+
+const featuredClassNames = {
+  gameName:
+    "font-bold text-2xl md:text-3xl lg:text-4xl mb-4 md:mb-8 text-black",
+  gameDetails: "max-w-screen-md text-sm mb-8 md:mb-12 text-black",
+  gameImage: "h-72 md:h-96 lg:h-112 w-full object-cover rounded-lg",
+};
+
+const styles = {
+  categorySection:
+    "bg-center bg-cover bg-no-repeat py-16 sm:py-20 md:py-28 lg:py-32",
+  categoryContent: "container mx-auto px-4 sm:px-6 md:px-8",
+  categoryHeading:
+    "text-center text-white max-w-md sm:max-w-lg md:max-w-2xl mx-auto text-primary font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-4 leading-[130%,187%,130%,130%]",
+  categorySubHeading:
+    "text-center bg-primary-gradient px-8 rounded-3xl py-5 max-w-md sm:max-w-lg md:max-w-4xl mx-auto text-white text-base sm:text-lg md:text-xl lg:text-2xl mb-8",
+};
+
+const recentGamesClasses = {
+  section: "py-16 lg:py-36 px-4 lg:px-36 text-white text-center",
+  heading: "text-3xl lg:text-4xl font-bold mb-3 text-black",
+  subHeading: "text-gray-400 max-w-xl mx-auto lg:text-lg",
+};
