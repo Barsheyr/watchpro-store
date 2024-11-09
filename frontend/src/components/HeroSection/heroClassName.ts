@@ -6,7 +6,7 @@ const heroClassNames = {
   heading:
     "tracking-tight mb-3 text-primary-dark font-bold text-xl md:text-2xl lg:text-3xl text-gray-900",
   paragraph:
-    "mt-3 font-medium text-base md:text-lg text-gray-300 sm:mt-5 sm:max-w-md md:mt-5 md:max-w-xl lg:mx-0 text-black",
+    "mt-3 font-medium text-base md:text-lg text-gray-300 sm:mt-5 sm:max-w-md md:mt-5 md:max-w-xl lg:mx-0 text-gray-800",
   button:
     "mt-8 sm:mt-10 inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-[40px] shadow-sm text-white bg-black hover:bg-gray-700 sm:px-8",
   buttonSpan: "ml-4",
