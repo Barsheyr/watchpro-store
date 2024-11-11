@@ -53,7 +53,7 @@ const classNames = {
     "relative bg-primary-gradient inline-block max-w-screen-xl mx-auto px-4 py-8 md:py-12 lg:px-8 lg:py-20",
   title:
     "text-2xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-white",
-  subtitle: "mt-2 md:mt-4 max-w-3xl text-sm md:text-xl text-gray-300",
+  subtitle: "mt-2 md:mt-4 max-w-3xl text-sm md:text-xl text-white",
   author: "mt-4 md:mt-6 flex items-center",
   authorAvatar:
     "flex-shrink-0 object-cover h-8 md:h-10 w-8 md:w-10 rounded-full",
@@ -68,7 +68,7 @@ const classNames = {
   blogDate: "mt-2 text-gray-200 text-sm",
   blogText: "mt-4 text-gray-200 leading-7",
   section: "py-16 lg:py-36 px-4 lg:px-36 text-white text-center",
-  heading: "text-3xl lg:text-4xl font-bold mb-3",
+  heading: "text-3xl lg:text-4xl font-bold mb-3 text-black",
   subHeading: "text-gray-400 max-w-xl mx-auto lg:text-lg",
   latestButton:
     "mt-4 sm:mt-0 px-6 py-2 rounded-md bg-primary-gradient border-2 border-primary-dark",

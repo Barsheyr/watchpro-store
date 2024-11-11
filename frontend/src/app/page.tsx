@@ -103,7 +103,7 @@ export default async function Home() {
         </p>
 
         <div className="grid  grid-cols-2 lg:grid-cols-4 gap-5 py-10">
-          {games.map((game) => (
+          {recentGames.map((game) => (
             <WatchCard
               key={game._id}
               watchName={game.name}
