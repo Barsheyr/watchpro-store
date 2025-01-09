@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { Montserrat, Poppins } from "next/font/google";
+
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
+import { Providers } from "@/redux/Providers";
+import Cart from "@/components/Cart/Cart";
 
 import "./globals.css";
 
@@ -32,9 +35,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${poppins.variable} ${montserrat.variable}`}>
-        <Header />
-        <main> {children}</main>
-        <Footer />
+        <Providers>
+          <Cart />
+          <Header />
+          <main>{children}</main>
+          <Footer />
+        </Providers>
       </body>
     </html>
   );

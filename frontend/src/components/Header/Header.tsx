@@ -7,9 +7,9 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 // import { signIn, useSession, signOut } from "next-auth/react";
 
 import headerClassNames from "./headerClassNames";
-// import { useAppDispatch } from "@/hooks/storeHook";
-// import { toggleCart } from "@/redux/features/cartSlice";
-// import useCartTotals from "@/hooks/useCartTotals";
+import { useAppDispatch } from "@/hooks/storeHook";
+import { toggleCart } from "@/redux/features/cartSlice";
+import useCartTotals from "@/hooks/useCartTotals";
 // import Signup from "../Signup/Signup";
 
 const Header = () => {
@@ -38,9 +38,9 @@ const Header = () => {
   //   },
   // });
 
-  // const { totalQuantity } = useCartTotals();
+  const { totalQuantity } = useCartTotals();
 
-  // const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
 
   // const toggleForm = () => {
   //   setIsSignupFormOpen(!isSignupFormOpen);
@@ -66,13 +66,13 @@ const Header = () => {
           <nav className={nav}>
             <ul className={ul}>
               <li>
-                {/* <button onClick={() => dispatch(toggleCart())} className={link}>
+                <button onClick={() => dispatch(toggleCart())} className={link}>
                   <span>
                     Cart
                     <AiOutlineShoppingCart className="inline-block text-3xl" />
                   </span>
                   <div className={cart}>{totalQuantity}</div>
-                </button> */}
+                </button>
                 <button>
                   <span>
                     Cart

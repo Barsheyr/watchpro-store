@@ -6,8 +6,8 @@ import { FaShoppingCart } from "react-icons/fa";
 import { getGame } from "@/libs/api";
 import CarouselSlider from "@/components/CarouselSlider/CarouselSlider";
 import { Game } from "@/models/game";
-// import { useAppDispatch } from "@/hooks/storeHook";
-// import { addItemToCart } from "@/redux/features/cartSlice";
+import { useAppDispatch } from "@/hooks/storeHook";
+import { addItemToCart } from "@/redux/features/cartSlice";
 
 const GameDetailsClient = (props: {
   slug: string;
@@ -19,7 +19,7 @@ const GameDetailsClient = (props: {
   const [price, setPrice] = useState(0);
   const [gameDetails, setGameDetails] = useState<Game>();
 
-  // const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     const fetchGameDetails = async () => {
@@ -46,10 +46,10 @@ const GameDetailsClient = (props: {
     }
   };
 
-  // const handleAddToCart = () => {
-  //   if (!gameDetails) return;
-  //   dispatch(addItemToCart({ ...gameDetails, quantity }));
-  // };
+  const handleAddToCart = () => {
+    if (!gameDetails) return;
+    dispatch(addItemToCart({ ...gameDetails, quantity }));
+  };
 
   return (
     <div>
@@ -86,7 +86,7 @@ const GameDetailsClient = (props: {
             )}
             <div className={classNames.cartPrice}>$ {price}</div>
             <button
-              // onClick={handleAddToCart}
+              onClick={handleAddToCart}
               className={`${classNames.button} ${
                 quantity === 0 && classNames.disabledButton
               }`}

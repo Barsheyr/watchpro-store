@@ -3,8 +3,8 @@ import HeroSection from "@/components/HeroSection/HeroSection";
 
 import { getGames } from "@/libs/api";
 
-const Games = async (props: {}) => {
-  const games = await getGames();
+const Watches = async (props: {}) => {
+  const watches = await getGames();
 
   return (
     <div>
@@ -17,13 +17,13 @@ const Games = async (props: {}) => {
         </p>
 
         <div className="flex rounded gap-8 flex-wrap py-10">
-          {games.map((game) => (
+          {watches.map((watch) => (
             <WatchCard
-              key={game._id}
-              watchName={game.name}
-              imageUrl={game.images[0].url}
-              price={game.price}
-              slug={game.slug.current}
+              key={watch._id}
+              watchName={watch.name}
+              imageUrl={watch.images[0].url}
+              price={watch.price}
+              slug={watch.slug.current}
             />
           ))}
         </div>
@@ -32,7 +32,7 @@ const Games = async (props: {}) => {
   );
 };
 
-export default Games;
+export default Watches;
 
 const classNames = {
   section: "py-16 lg:pb-36 px-4 lg:px-36 text-white text-center",

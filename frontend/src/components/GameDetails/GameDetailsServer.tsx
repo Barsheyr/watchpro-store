@@ -1,6 +1,6 @@
 import { getGame } from "@/libs/api";
 
-const GameDetailsServer: any = async (props: { slug: string }) => {
+const GameDetailsServer = async (props: { slug: string }) => {
   const { slug } = props;
 
   const gameDetails = await getGame(slug);

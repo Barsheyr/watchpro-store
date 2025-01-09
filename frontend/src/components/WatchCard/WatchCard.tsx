@@ -15,7 +15,7 @@ const WatchCard: FC<WatchCardProps> = (props) => {
   const { watchName, imageUrl, slug, price } = props;
 
   return (
-    <Link href={`/watch/${slug}`} className={watchCardClassNames.container}>
+    <Link href={`/watches/${slug}`} className={watchCardClassNames.container}>
       <h3 className={watchCardClassNames.price}>{price} $</h3>
 
       <Image
