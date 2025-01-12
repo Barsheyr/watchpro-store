@@ -3,34 +3,34 @@
 import Link from "next/link";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 // import { FcGoogle } from "react-icons/fc";
-// import { useState } from "react";
+import { useState } from "react";
 // import { signIn, useSession, signOut } from "next-auth/react";
 
 import headerClassNames from "./headerClassNames";
 import { useAppDispatch } from "@/hooks/storeHook";
 import { toggleCart } from "@/redux/features/cartSlice";
 import useCartTotals from "@/hooks/useCartTotals";
-// import Signup from "../Signup/Signup";
+import Signup from "../SignUp/Signup";
 
 const Header = () => {
   const {
     header,
     container,
-    li,
+    // li,
     logoContainer,
     link,
     logo,
     nav,
     ul,
-    orders,
-    contactUs,
-    signupBtn,
-    signinBtn,
-    logoutBtn,
+    // orders,
+    // contactUs,
+    // signupBtn,
+    // signinBtn,
+    // logoutBtn,
     cart,
   } = headerClassNames;
 
-  // const [isSignupFormOpen, setIsSignupFormOpen] = useState(false);
+  const [isSignupFormOpen, setIsSignupFormOpen] = useState(false);
   // const { status, data: session } = useSession({
   //   required: true,
   //   onUnauthenticated() {
@@ -42,9 +42,9 @@ const Header = () => {
 
   const dispatch = useAppDispatch();
 
-  // const toggleForm = () => {
-  //   setIsSignupFormOpen(!isSignupFormOpen);
-  // };
+  const toggleForm = () => {
+    setIsSignupFormOpen(!isSignupFormOpen);
+  };
 
   // const signinHandler = async () => {
   //   try {
@@ -56,7 +56,7 @@ const Header = () => {
 
   return (
     <>
-      {/* <Signup isSignupFormOpen={isSignupFormOpen} toggleForm={toggleForm} /> */}
+      <Signup isSignupFormOpen={isSignupFormOpen} toggleForm={toggleForm} />
       <header className={header}>
         <div className={container}>
           <Link href="/" className={logoContainer}>

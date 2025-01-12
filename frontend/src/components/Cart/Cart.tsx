@@ -8,14 +8,14 @@ import { useAppDispatch, useAppSelector } from "@/hooks/storeHook";
 // import { useSession } from "next-auth/react";
 import { removeItemFromCart, toggleCart } from "@/redux/features/cartSlice";
 import Image from "next/image";
-// import useCartTotals from "@/hooks/useCartTotals";
+import useCartTotals from "@/hooks/useCartTotals";
 // import { getStripe } from "@/libs/loadStripe";
 
 const Cart: FC = () => {
   const { showCart, cartItems } = useAppSelector((state) => state.cart);
   const [renderComponent, setRenderComponent] = useState(false);
 
-  // const { totalPrice } = useCartTotals();
+  const { totalPrice } = useCartTotals();
 
   // const { data: session } = useSession();
 
@@ -98,7 +98,7 @@ const Cart: FC = () => {
 
       <div className={classNames.subtotalContainer}>
         <span className={classNames.subtotalText}>Subtotal</span>
-        {/* <span className={classNames.subtotalPrice}>$ {totalPrice}</span> */}
+        <span className={classNames.subtotalPrice}>$ {totalPrice}</span>
       </div>
       <button onClick={checkoutHandler} className={classNames.checkoutBtn}>
         Checkout
