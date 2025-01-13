@@ -17,6 +17,30 @@ const Signup: FC<SignupProps> = (props) => {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
+  const signupHandler = async () => {
+    if (!emailRef.current || !passwordRef.current) return;
+
+    setIsFormSubmitting(true);
+
+    try {
+      const response = await axios.post("/api/sign-up", {
+        email: emailRef.current.value,
+        password: passwordRef.current.value,
+      });
+
+      setIsFormSubmitting(false);
+
+      if (response.data)
+        toast.success(`${response.statusText}. Please sign in`);
+    } catch (error) {
+      setIsFormSubmitting(false);
+      toast.error("Something went wrong");
+      console.log("Error", error);
+    }
+
+    toggleForm();
+  };
+
   return isSignupFormOpen ? (
     <div className={classNames.container}>
       <div className={classNames.card}>
