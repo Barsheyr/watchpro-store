@@ -5,6 +5,7 @@ import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import { Providers } from "@/redux/Providers";
 import Cart from "@/components/Cart/Cart";
+import Toast from "@/components/Toast/Toast";
 
 import "./globals.css";
 
@@ -35,6 +36,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${poppins.variable} ${montserrat.variable}`}>
+        <Toast />
         <Providers>
           <Cart />
           <Header />
