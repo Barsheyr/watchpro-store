@@ -6,6 +6,7 @@ import Footer from "@/components/Footer/Footer";
 import { Providers } from "@/redux/Providers";
 import Cart from "@/components/Cart/Cart";
 import Toast from "@/components/Toast/Toast";
+import { NextAuthProvider } from "@/components/AuthProvider/AuthProvider";
 
 import "./globals.css";
 
@@ -38,10 +39,12 @@ export default function RootLayout({
       <body className={`${poppins.variable} ${montserrat.variable}`}>
         <Toast />
         <Providers>
-          <Cart />
-          <Header />
-          <main>{children}</main>
-          <Footer />
+          <NextAuthProvider>
+            <Cart />
+            <Header />
+            <main className="bg-primary-gradient min-h-screen">{children}</main>
+            <Footer />
+          </NextAuthProvider>
         </Providers>
       </body>
     </html>

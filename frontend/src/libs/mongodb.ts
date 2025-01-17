@@ -11,6 +11,7 @@ if (!process.env.MONGODB_URI) {
 const uri = process.env.MONGODB_URI;
 
 let client;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 let clientPromise: any;
 
 if (process.env.NODE_ENV === "development") {
