@@ -9,7 +9,7 @@ import { useAppDispatch, useAppSelector } from "@/hooks/storeHook";
 import { removeItemFromCart, toggleCart } from "@/redux/features/cartSlice";
 import Image from "next/image";
 import useCartTotals from "@/hooks/useCartTotals";
-// import { getStripe } from "@/libs/loadStripe";
+import { getStripe } from "@/libs/loadStripe";
 
 const Cart: FC = () => {
   const { showCart, cartItems } = useAppSelector((state) => state.cart);
@@ -25,7 +25,7 @@ const Cart: FC = () => {
     dispatch(removeItemFromCart({ _id: id }));
 
   const checkoutHandler = async () => {
-    // const stripe = await getStripe();
+    const stripe = await getStripe();
 
     const { data } = await axios.post("/api/stripe", {
       cartItems,
@@ -36,7 +36,7 @@ const Cart: FC = () => {
 
     localStorage.removeItem("cart");
 
-    // stripe.redirectToCheckout({ sessionId: data.id });
+    stripe.redirectToCheckout({ sessionId: data.id });
   };
 
   useEffect(() => {
