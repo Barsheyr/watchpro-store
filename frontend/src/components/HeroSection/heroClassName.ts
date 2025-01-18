@@ -1,10 +1,9 @@
 const heroClassNames = {
   hero: "px-6 sm:px-12 md:px-20 lg:px-36 py-40",
   grid: "grid grid-cols-1 lg:grid-cols-2 lg:gap-8",
-  content:
-    "max-w-md mx-auto lg:max-w-none lg:mx-0 lg:col-start-1 lg:col-end-2 flex flex-col justify-center",
+  content: "flex flex-col justify-center",
   heading:
-    "tracking-tight mb-3 text-primary-dark font-bold text-xl md:text-2xl lg:text-3xl text-gray-900",
+    "tracking-tight mb-3 text-primary-dark font-bold text-5xl md:text-2xl lg:text-3xl text-gray-900",
   paragraph:
     "mt-3 font-medium text-base md:text-lg text-gray-300 sm:mt-5 sm:max-w-md md:mt-5 md:max-w-xl lg:mx-0 text-gray-800",
   button:

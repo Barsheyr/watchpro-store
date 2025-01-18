@@ -1,6 +1,6 @@
 const headerClassNames = {
   header: "fixed w-full top-0 left-0 z-20 bg-black text-white",
-  container: "container mx-auto py-4 px-6 flex items-center justify-between",
+  container: "container mx-auto py-4 px-2 flex items-center justify-between",
   logoContainer: "flex items-center",
   logo: "font-bold text-xl hover:text-primary-light",
   nav: "",
