@@ -5,7 +5,7 @@ import { RiCloseLine } from "react-icons/ri";
 import axios from "axios";
 
 import { useAppDispatch, useAppSelector } from "@/hooks/storeHook";
-// import { useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { removeItemFromCart, toggleCart } from "@/redux/features/cartSlice";
 import Image from "next/image";
 import useCartTotals from "@/hooks/useCartTotals";
@@ -17,7 +17,7 @@ const Cart: FC = () => {
 
   const { totalPrice } = useCartTotals();
 
-  // const { data: session } = useSession();
+  const { data: session } = useSession();
 
   const dispatch = useAppDispatch();
 
@@ -29,7 +29,7 @@ const Cart: FC = () => {
 
     const { data } = await axios.post("/api/stripe", {
       cartItems,
-      // userEmail: session?.user?.email,
+      userEmail: session?.user?.email,
     });
 
     if (!data) return;
