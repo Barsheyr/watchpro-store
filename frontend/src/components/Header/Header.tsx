@@ -10,7 +10,7 @@ import headerClassNames from "./headerClassNames";
 import { useAppDispatch } from "@/hooks/storeHook";
 import { toggleCart } from "@/redux/features/cartSlice";
 import useCartTotals from "@/hooks/useCartTotals";
-import Signup from "../Signup/Signup";
+import Signup from "../SignUp/Signup";
 
 const Header = () => {
   const {
