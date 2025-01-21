@@ -7,7 +7,7 @@ const headerClassNames = {
   ul: "flex space-x-6",
   li: "",
   link: "hover:text-primary-light relative",
-  cart: "absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-primary border-2 border-white rounded-full -top-2 -right-2",
+  cart: "absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -right-2",
   contactUs: "px-6 py-2 rounded-md bg-primary hover:bg-primary-dark",
   orders: "px-6 py-2 rounded-md bg-primary hover:bg-primary-dark",
   signupBtn:
