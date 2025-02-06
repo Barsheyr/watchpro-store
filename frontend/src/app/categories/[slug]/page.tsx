@@ -24,7 +24,7 @@ const GameCategory = async (props: { params: { slug: string } }) => {
       <section className={classNames.section}>
         <h2 className={classNames.heading}>{slug.toUpperCase()} Games</h2>
         <p className={classNames.subHeading}>
-          Checkout our latest collection of{" "}
+          Checkout our latest collection of
           <span className="text-primary">{slug}</span> games
         </p>
         <div className="flex rounded gap-8 flex-wrap py-10">
