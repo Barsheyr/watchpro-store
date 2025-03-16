@@ -1,4 +1,4 @@
-import GameCard from "@/components/WatchCard/WatchCard";
+import GameCard from "@/components/GameCard/GameCard";
 import NewsLetter from "@/components/NewsLetter/NewsLetter";
 import { getCategory, getCategoryGames } from "@/libs/api";
 
@@ -31,7 +31,7 @@ const GameCategory = async (props: { params: { slug: string } }) => {
           {games.map((game) => (
             <GameCard
               key={game._id}
-              watchName={game.name}
+              gameName={game.name}
               imageUrl={game.images[0].url}
               price={game.price}
               slug={game.slug.current}

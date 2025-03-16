@@ -1,4 +1,4 @@
-const watchCategoryCardClassNames = {
+const gameCategoryCardClassNames = {
   container: "max-w-xs mx-auto lg:max-w-none lg:w-56 xl:w-64",
   image:
     "w-full hover:scale-110 transition-all duration-150 mx-auto w-50 h-20 rounded-lg object-cover lg:w-20 lg:h-20 xl:w-24 xl:h-24",
@@ -6,4 +6,4 @@ const watchCategoryCardClassNames = {
   arrow: "mx-auto",
 };
 
-export default watchCategoryCardClassNames;
+export default gameCategoryCardClassNames;

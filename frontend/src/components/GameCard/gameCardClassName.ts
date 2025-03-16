@@ -1,4 +1,4 @@
-const watchCardClassNames = {
+const gameCardClassNames = {
   container: "relative mx-auto w-[210px] h-[237px] rounded-2xl overflow-hidden",
   image: "w-full h-full object-cover",
   price:
@@ -7,4 +7,4 @@ const watchCardClassNames = {
     "absolute bottom-0 left-0 right-0 py-3 px-4 text-white font-bold text-md bg-black bg-opacity-75",
 };
 
-export default watchCardClassNames;
+export default gameCardClassNames;
