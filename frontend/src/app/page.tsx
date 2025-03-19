@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic"; // Forces fresh data on every request
+
 import Link from "next/link";
 import Image from "next/image";
 
@@ -7,79 +9,217 @@ import GameCategoryCard from "@/components/GameCategoryCard/GameCategoryCard";
 import NewsLetter from "@/components/NewsLetter/NewsLetter";
 import { getCategories, getGames, getRecentGames } from "@/libs/api";
 
+// export default async function Home() {
+//   const categories = await getCategories();
+//   const games = await getGames();
+//   const isTrendingGames = games?.filter((game) => game.isTrending);
+//   const isFeaturedGame = games?.find((game) => game.isFeatured);
+//   const recentGames = await getRecentGames();
+
+//   return (
+//     <>
+//       <HeroSection showLink />
+
+//       <section className={sectionClassNames.section}>
+//         <div className={sectionClassNames.trending}>
+//           <h2 className={sectionClassNames.trendingTitle}>
+//             Currently Trending Games
+//           </h2>
+//         </div>
+
+//         <div className="flex gap-8 flex-wrap">
+//           {isTrendingGames.map((game) => (
+//             <GameCard
+//               key={game._id}
+//               gameName={game.name}
+//               imageUrl={game.images[0].url}
+//               slug={game.slug.current}
+//               price={game.price}
+//             />
+//           ))}
+//         </div>
+//       </section>
+
+//       {isFeaturedGame && (
+//         <>
+//           <h3 className="font-semibold text-2xl max-w-3xl text-center mx-auto text-primary-dark pt-12 sm:pt-28 pb-8 sm:pb-16 leading-[125%] sm:leading-[187%]">
+//             Featured Game
+//           </h3>
+
+//           <section className={sectionClassNames.featured}>
+//             <div className={sectionClassNames.featuredContent}>
+//               <h2 className={featuredClassNames.gameName}>
+//                 {isFeaturedGame.name}
+//               </h2>
+//               <p className={featuredClassNames.gameDetails}>
+//                 {isFeaturedGame.description}
+//               </p>
+//               <Link href={`/games/${isFeaturedGame.slug.current}`}>
+//                 <Image
+//                   src={isFeaturedGame.images[0].url}
+//                   alt={isFeaturedGame.name}
+//                   width={500}
+//                   height={500}
+//                   className={featuredClassNames.gameImage}
+//                 />
+//               </Link>
+//             </div>
+//           </section>
+//         </>
+//       )}
+
+//       <section
+//         style={{
+//           backgroundImage:
+//             "url('https://images.unsplash.com/photo-1592155931584-901ac15763e3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cGxheSUyMHN0YXRpb258ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60",
+//         }}
+//         className={styles.categorySection}
+//       >
+//         <div className={styles.categoryContent}>
+//           <h2 className={styles.categoryHeading}>Categories</h2>
+//           <p className={styles.categorySubHeading}>
+//             Explore a wide range of games, offering thrilling adventures,
+//             challenging sports, and immersive action gameplay. Discover new
+//             worlds, compete with friends, and embark on epic quests that will
+//             keep you entertained for hours.
+//           </p>
+//           <div className="flex flex-wrap">
+//             {categories.map((category) => (
+//               <GameCategoryCard
+//                 key={category._id}
+//                 categoryImage={category.image}
+//                 categoryName={category.name}
+//                 slug={category.slug.current}
+//               />
+//             ))}
+//           </div>
+//         </div>
+//       </section>
+
+//       <section id="recent-games" className={recentGamesClasses.section}>
+//         <h2 className={recentGamesClasses.heading}>Our Recent Games</h2>
+//         <p className={recentGamesClasses.subHeading}>
+//           Stay Ahead of the Gaming Curve with Our Latest Games.
+//         </p>
+
+//         <div className="flex rounded gap-8 flex-wrap py-10">
+//           {recentGames.map((game) => (
+//             // <GameCard
+//             //   key={game._id}
+//             //   gameName={game.name}
+//             //   imageUrl={game.images[0].url}
+//             //   price={game.price}
+//             //   slug={game.slug.current}
+//             // />
+
+//             <GameCard
+//               key={game._id}
+//               gameName={game.name}
+//               imageUrl={game.images[0]?.url || "/fallback-image.jpg"} // Fallback image
+//               price={game.price}
+//               slug={game.slug?.current || "#"} // Prevents crashing
+//             />
+//           ))}
+//         </div>
+
+//         <Link href="games" className={sectionClassNames.latestButton}>
+//           See All
+//         </Link>
+//       </section>
+
+//       <NewsLetter />
+//     </>
+//   );
+// }
+
+interface Category {
+  _id: string;
+  name: string;
+  image: string;
+  slug: { current: string };
+}
+
+interface Game {
+  _id: string;
+  name: string;
+  images: { url: string }[];
+  price: number;
+  isTrending: boolean;
+  isFeatured: boolean;
+  description: string;
+  slug: { current: string };
+}
 export default async function Home() {
-  const categories = await getCategories();
-  const games = await getGames();
-  const isTrendingGames = games?.filter((game) => game.isTrending);
-  const isFeaturedGame = games?.find((game) => game.isFeatured);
-  const recentGames = await getRecentGames();
+  let categories: Category[] = [];
+  let games: Game[] = [];
+  let recentGames: Game[] = [];
+  let isTrendingGames: Game[] = [];
+  let isFeaturedGame: Game | null = null;
+
+  try {
+    categories = await getCategories();
+    games = await getGames();
+    recentGames = await getRecentGames();
+    isTrendingGames = games?.filter((game) => game.isTrending);
+    isFeaturedGame = games?.find((game) => game.isFeatured);
+  } catch (error) {
+    console.error("Error fetching home page data:", error);
+  }
 
   return (
     <>
       <HeroSection showLink />
 
-      <section className={sectionClassNames.section}>
-        <div className={sectionClassNames.trending}>
-          <h2 className={sectionClassNames.trendingTitle}>
-            Currently Trending Games
-          </h2>
-        </div>
+      {isTrendingGames.length > 0 && (
+        <section className={sectionClassNames.section}>
+          <div className={sectionClassNames.trending}>
+            <h2 className={sectionClassNames.trendingTitle}>
+              Currently Trending Games
+            </h2>
+          </div>
 
-        <div className="flex gap-8 flex-wrap">
-          {isTrendingGames.map((game) => (
-            <GameCard
-              key={game._id}
-              gameName={game.name}
-              imageUrl={game.images[0].url}
-              slug={game.slug.current}
-              price={game.price}
-            />
-          ))}
-        </div>
-      </section>
-
-      {isFeaturedGame && (
-        <>
-          <h3 className="font-semibold text-2xl max-w-3xl text-center mx-auto text-primary-dark pt-12 sm:pt-28 pb-8 sm:pb-16 leading-[125%] sm:leading-[187%]">
-            Featured Game
-          </h3>
-
-          <section className={sectionClassNames.featured}>
-            <div className={sectionClassNames.featuredContent}>
-              <h2 className={featuredClassNames.gameName}>
-                {isFeaturedGame.name}
-              </h2>
-              <p className={featuredClassNames.gameDetails}>
-                {isFeaturedGame.description}
-              </p>
-              <Link href={`/games/${isFeaturedGame.slug.current}`}>
-                <Image
-                  src={isFeaturedGame.images[0].url}
-                  alt={isFeaturedGame.name}
-                  width={500}
-                  height={500}
-                  className={featuredClassNames.gameImage}
-                />
-              </Link>
-            </div>
-          </section>
-        </>
+          <div className="flex gap-8 flex-wrap">
+            {isTrendingGames.map((game) => (
+              <GameCard
+                key={game._id}
+                gameName={game.name}
+                imageUrl={game.images[0]?.url || "/fallback-image.jpg"}
+                slug={game.slug.current}
+                price={game.price}
+              />
+            ))}
+          </div>
+        </section>
       )}
 
-      <section
-        style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1592155931584-901ac15763e3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cGxheSUyMHN0YXRpb258ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60",
-        }}
-        className={styles.categorySection}
-      >
+      {isFeaturedGame && (
+        <section className={sectionClassNames.featured}>
+          <div className={sectionClassNames.featuredContent}>
+            <h2 className={featuredClassNames.gameName}>
+              {isFeaturedGame.name}
+            </h2>
+            <p className={featuredClassNames.gameDetails}>
+              {isFeaturedGame.description}
+            </p>
+            <Link href={`/games/${isFeaturedGame.slug.current}`}>
+              <Image
+                src={isFeaturedGame.images[0]?.url || "/fallback-image.jpg"}
+                alt={isFeaturedGame.name}
+                width={500}
+                height={500}
+                className={featuredClassNames.gameImage}
+              />
+            </Link>
+          </div>
+        </section>
+      )}
+
+      <section className={styles.categorySection}>
         <div className={styles.categoryContent}>
           <h2 className={styles.categoryHeading}>Categories</h2>
           <p className={styles.categorySubHeading}>
             Explore a wide range of games, offering thrilling adventures,
-            challenging sports, and immersive action gameplay. Discover new
-            worlds, compete with friends, and embark on epic quests that will
-            keep you entertained for hours.
+            challenging sports, and immersive action gameplay.
           </p>
           <div className="flex flex-wrap">
             {categories.map((category) => (
@@ -105,7 +245,7 @@ export default async function Home() {
             <GameCard
               key={game._id}
               gameName={game.name}
-              imageUrl={game.images[0].url}
+              imageUrl={game.images[0]?.url || "/fallback-image.jpg"}
               price={game.price}
               slug={game.slug.current}
             />
