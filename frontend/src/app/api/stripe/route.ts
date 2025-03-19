@@ -103,7 +103,7 @@ async function fetchAndCalculateItemPricesAndQuantity(cartItems: Game[]) {
     return calculatedItemPrices;
   } catch (error) {
     return new NextResponse(
-      "Quantiy has been updated, please update your cart",
+      "Quantity has been updated, please update your cart",
       { status: 500 }
     );
   }

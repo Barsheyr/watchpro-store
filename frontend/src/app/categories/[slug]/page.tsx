@@ -22,7 +22,7 @@ const GameCategory = async (props: { params: { slug: string } }) => {
       </section>
 
       <section className={classNames.section}>
-        <h2 className={classNames.heading}>{slug.toUpperCase()} Games</h2>
+        <h2 className={classNames.heading}>{slug.toUpperCase()} Games </h2>
         <p className={classNames.subHeading}>
           Checkout our latest collection of{" "}
           <span className="text-primary">{slug}</span> games
