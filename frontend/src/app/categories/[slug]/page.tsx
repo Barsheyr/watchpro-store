@@ -53,11 +53,7 @@ import GameCard from "@/components/GameCard/GameCard";
 import NewsLetter from "@/components/NewsLetter/NewsLetter";
 import { getCategory, getCategoryGames } from "@/libs/api";
 
-interface PageParams {
-  params: { slug: string };
-}
-
-const GameCategory = async ({ params }: PageParams) => {
+const GameCategory = async ({ params }: { params: { slug: string } }) => {
   const { slug } = params;
 
   const games = await getCategoryGames(slug);
