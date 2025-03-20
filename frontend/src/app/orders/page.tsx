@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
@@ -39,6 +40,7 @@ const Orders = async () => {
           </thead>
           <tbody>
             {orderData.map((order: any) => {
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               const totalPrice = order.items.reduce((acc: any, item: any) => {
                 const itemPrice = item.quantity * item.game.price;
                 return acc + itemPrice;

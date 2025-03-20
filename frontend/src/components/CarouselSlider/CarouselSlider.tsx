@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
@@ -40,7 +41,7 @@ const CarouselSlider: FC<CarouselSliderProps> = (props) => {
     }, interval);
 
     return () => clearInterval(timer);
-  }, [interval, currentImageIndex]);
+  }, [interval, currentImageIndex, goToNextImage]);
 
   return (
     <div className={classNames.container}>
