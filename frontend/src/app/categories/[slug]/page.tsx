@@ -2,28 +2,41 @@ import GameCard from "@/components/GameCard/GameCard";
 import NewsLetter from "@/components/NewsLetter/NewsLetter";
 import { getCategory, getCategoryGames } from "@/libs/api";
 
-const GameCategory = async ({ params }: { params: { slug: string } }) => {
-  const { slug } = params;
+// Explicitly define params type
+type PageProps = {
+  params: { slug: string };
+};
 
-  const games = await getCategoryGames(slug);
-  const { subtitle } = await getCategory(slug);
+const GameCategory = async ({ params }: PageProps) => {
+  if (!params || !params.slug) {
+    return <h1>Error: Missing category slug</h1>;
+  }
+
+  console.log("Slug received:", params.slug); // Debugging
+
+  const games = await getCategoryGames(params.slug);
+  const { subtitle } = await getCategory(params.slug);
 
   return (
     <>
       <section className={classNames.hero}>
         <div className={classNames.heroContent}>
           <div className="lg:w-3/4">
-            <h1 className={classNames.title}>{slug.toUpperCase()} Games</h1>
+            <h1 className={classNames.title}>
+              {params.slug.toUpperCase()} Games
+            </h1>
             <p className={classNames.subtitle}>{subtitle}</p>
           </div>
         </div>
       </section>
 
       <section className={classNames.section}>
-        <h2 className={classNames.heading}>{slug.toUpperCase()} Games</h2>
+        <h2 className={classNames.heading}>
+          {params.slug.toUpperCase()} Games
+        </h2>
         <p className={classNames.subHeading}>
           Checkout our latest collection of{" "}
-          <span className="text-primary">{slug}</span> games
+          <span className="text-primary">{params.slug}</span> games
         </p>
         <div className="flex rounded gap-8 flex-wrap py-10">
           {games.map((game) => (
