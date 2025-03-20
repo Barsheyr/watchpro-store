@@ -2,41 +2,28 @@ import GameCard from "@/components/GameCard/GameCard";
 import NewsLetter from "@/components/NewsLetter/NewsLetter";
 import { getCategory, getCategoryGames } from "@/libs/api";
 
-// Explicitly define params type
-type PageProps = {
-  params: { slug: string };
-};
+const GameCategory = async ({ params }: { params: { slug: string } }) => {
+  const { slug } = params;
 
-const GameCategory = async ({ params }: PageProps) => {
-  if (!params || !params.slug) {
-    return <h1>Error: Missing category slug</h1>;
-  }
-
-  console.log("Slug received:", params.slug); // Debugging
-
-  const games = await getCategoryGames(params.slug);
-  const { subtitle } = await getCategory(params.slug);
+  const games = await getCategoryGames(slug);
+  const { subtitle } = await getCategory(slug);
 
   return (
     <>
       <section className={classNames.hero}>
         <div className={classNames.heroContent}>
           <div className="lg:w-3/4">
-            <h1 className={classNames.title}>
-              {params.slug.toUpperCase()} Games
-            </h1>
+            <h1 className={classNames.title}>{slug.toUpperCase()} Games</h1>
             <p className={classNames.subtitle}>{subtitle}</p>
           </div>
         </div>
       </section>
 
       <section className={classNames.section}>
-        <h2 className={classNames.heading}>
-          {params.slug.toUpperCase()} Games
-        </h2>
+        <h2 className={classNames.heading}>{slug.toUpperCase()} Games</h2>
         <p className={classNames.subHeading}>
           Checkout our latest collection of{" "}
-          <span className="text-primary">{params.slug}</span> games
+          <span className="text-primary">{slug}</span> games
         </p>
         <div className="flex rounded gap-8 flex-wrap py-10">
           {games.map((game) => (
@@ -65,22 +52,7 @@ const classNames = {
   title:
     "text-2xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-white",
   subtitle: "mt-2 md:mt-4 max-w-3xl text-sm md:text-xl text-gray-300",
-  author: "mt-4 md:mt-6 flex items-center",
-  authorAvatar:
-    "flex-shrink-0 object-cover h-8 md:h-10 w-8 md:w-10 rounded-full",
-  authorName: "ml-2 md:ml-3 text-sm md:text-xl font-medium text-white",
-  blogContentWrapper:
-    "flex flex-col justify-between max-w-7xl mx-auto mt-12 px-4 sm:px-6 lg:flex-row lg:px-8",
-  blogImageWrapper: "w-full lg:w-1/3",
-  blogImage:
-    "w-full h-full object-cover rounded-lg hover:translate-y-2 transition-all duration-500",
-  blogMainContent: "w-full lg:w-2/3 mt-6 lg:mt-0 lg:pl-8",
-  blogTitle: "text-3xl font-bold text-gray-300",
-  blogDate: "mt-2 text-gray-200 text-sm",
-  blogText: "mt-4 text-gray-200 leading-7",
   section: "py-16 lg:py-36 px-4 lg:px-36 text-white text-center",
   heading: "text-3xl lg:text-4xl font-bold mb-3",
   subHeading: "text-gray-400 max-w-xl mx-auto lg:text-lg",
-  latestButton:
-    "mt-4 sm:mt-0 px-6 py-2 rounded-md bg-primary-gradient border-2 border-primary-dark",
 };
