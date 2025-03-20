@@ -2,10 +2,12 @@ import GameCard from "@/components/GameCard/GameCard";
 import NewsLetter from "@/components/NewsLetter/NewsLetter";
 import { getCategory, getCategoryGames } from "@/libs/api";
 
-const GameCategory = async (props: { params: { slug: string } }) => {
-  const {
-    params: { slug },
-  } = props;
+interface PageProps {
+  params: { slug: string };
+}
+
+const GameCategory = async ({ params }: PageProps) => {
+  const { slug } = params;
 
   const games = await getCategoryGames(slug);
   const { subtitle } = await getCategory(slug);
