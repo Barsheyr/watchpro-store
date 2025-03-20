@@ -2,8 +2,13 @@ import GameCard from "@/components/GameCard/GameCard";
 import NewsLetter from "@/components/NewsLetter/NewsLetter";
 import { getCategory, getCategoryGames } from "@/libs/api";
 
-const GameCategory = async ({ params }: { params: { slug: string } }) => {
-  const { slug } = params;
+// ✅ Define the correct type for the params prop
+interface CategoryPageProps {
+  params: { slug: string };
+}
+
+const GameCategory = async ({ params }: CategoryPageProps) => {
+  const { slug } = params; // ✅ No need for type assertion
 
   const games = await getCategoryGames(slug);
   const { subtitle } = await getCategory(slug);
