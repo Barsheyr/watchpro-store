@@ -79,12 +79,23 @@ import GameCard from "../../../components/GameCard/GameCard";
 import NewsLetter from "../../../components/NewsLetter/NewsLetter";
 import { getCategory, getCategoryGames } from "../../../libs/api";
 
-// Use Next.js's generated params type
-export default async function GameCategory({
+// Generate metadata for this page
+export async function generateMetadata({
   params,
 }: {
   params: { slug: string };
 }) {
+  const { slug } = params;
+  const { subtitle } = await getCategory(slug);
+
+  return {
+    title: `${slug.toUpperCase()} Games`,
+    description: subtitle,
+  };
+}
+
+// Define the page component with the correct typing
+export default async function Page({ params }: { params: { slug: string } }) {
   const { slug } = params;
 
   const games = await getCategoryGames(slug);
