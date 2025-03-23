@@ -74,18 +74,17 @@
 //     "mt-4 sm:mt-0 px-6 py-2 rounded-md bg-primary-gradient border-2 border-primary-dark",
 
 // };
+
 import GameCard from "../../../components/GameCard/GameCard";
 import NewsLetter from "../../../components/NewsLetter/NewsLetter";
 import { getCategory, getCategoryGames } from "../../../libs/api";
 
-// Next.js expects this interface for dynamic route params
-interface CategoryParams {
-  params: {
-    slug: string;
-  };
-}
-
-const GameCategory = async ({ params }: CategoryParams) => {
+// Use Next.js's generated params type
+export default async function GameCategory({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const { slug } = params;
 
   const games = await getCategoryGames(slug);
@@ -124,9 +123,7 @@ const GameCategory = async ({ params }: CategoryParams) => {
       <NewsLetter />
     </>
   );
-};
-
-export default GameCategory;
+}
 
 const classNames = {
   hero: "relative py-16 md:py-20 bg-cover bg-[url('https://images.unsplash.com/photo-1593305841991-05c297ba4575?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cGxheSUyMHN0YXRpb258ZW58MHx8MHx8&auto=format&fit=crop&w=400&q=60')]",
