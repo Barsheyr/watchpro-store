@@ -74,31 +74,22 @@
 //     "mt-4 sm:mt-0 px-6 py-2 rounded-md bg-primary-gradient border-2 border-primary-dark",
 
 // };
-
 import GameCard from "../../../components/GameCard/GameCard";
 import NewsLetter from "../../../components/NewsLetter/NewsLetter";
 import { getCategory, getCategoryGames } from "../../../libs/api";
-import { notFound } from "next/navigation";
 
-type PageProps = {
+// Next.js expects this interface for dynamic route params
+interface CategoryParams {
   params: {
     slug: string;
   };
-};
+}
 
-const GameCategory = async ({ params }: PageProps) => {
+const GameCategory = async ({ params }: CategoryParams) => {
   const { slug } = params;
 
-  if (!slug) {
-    return notFound();
-  }
-
   const games = await getCategoryGames(slug);
-  const category = await getCategory(slug);
-
-  if (!category) {
-    return notFound();
-  }
+  const { subtitle } = await getCategory(slug);
 
   return (
     <>
@@ -106,7 +97,7 @@ const GameCategory = async ({ params }: PageProps) => {
         <div className={classNames.heroContent}>
           <div className="lg:w-3/4">
             <h1 className={classNames.title}>{slug.toUpperCase()} Games</h1>
-            <p className={classNames.subtitle}>{category.subtitle}</p>
+            <p className={classNames.subtitle}>{subtitle}</p>
           </div>
         </div>
       </section>
@@ -122,7 +113,7 @@ const GameCategory = async ({ params }: PageProps) => {
             <GameCard
               key={game._id}
               gameName={game.name}
-              imageUrl={game.images?.[0]?.url ?? ""}
+              imageUrl={game.images[0].url}
               price={game.price}
               slug={game.slug.current}
             />
