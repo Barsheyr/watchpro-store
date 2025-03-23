@@ -3,7 +3,7 @@
 import GameDetailsClient from "../../../components/GameDetails/GameDetailsClient";
 import GameDetailsServer from "../../../components/GameDetails/GameDetailsServer";
 
-const GameItem = ({ params }: { params: { slug: string } }) => {
+const GameItem = ({ params }) => {
   const { slug } = params;
 
   return (
